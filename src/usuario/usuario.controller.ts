@@ -6,9 +6,6 @@ import {
   Param,
   Post,
   Put,
-  UseInterceptors,
-  CacheInterceptor,  // Importa o CacheInterceptor
-  CacheTTL,          // Importa o decorator CacheTTL
 } from '@nestjs/common';
 import { v4 as uuid } from 'uuid';
 import { AtualizaUsuarioDTO } from './dto/AtualizaUsuario.dto';
@@ -43,8 +40,6 @@ export class UsuarioController {
   }
 
   @Get()
-  @UseInterceptors(CacheInterceptor) // Ativa o CacheInterceptor para esta rota
-  @CacheTTL(15 * 60 * 1000)         // Define TTL personalizado de 15 minutos (15 * 60 * 1000 ms)
   async listUsuarios() {
     try {
       return await this.usuarioService.listUsuarios();
